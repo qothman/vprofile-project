@@ -1,0 +1,18 @@
+  name: Deploy Sample Application
+  hosts: web
+  tasks:
+      name: Clone applciation from Git
+      git:
+        repo: https://github.com/qothman/vprofile-project.git
+        dest: /var/www/vprofile-project
+        version: master
+
+      name: Install application dependies
+      command: npm install
+      args: 
+        chdir: /var/www/vprofile
+
+      name: Configure application settings
+      template:
+        src: app_config.conf.j2
+        dest: /etc/vprofile-project

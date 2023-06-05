@@ -1,0 +1,15 @@
+  name: Manage users and SSH keys
+  hosts: all
+  tasks:
+      name: Create user accounts
+      user:
+        name: Souf
+        state: present
+        createhome: yes
+        shell: /bin/bash
+      
+      name: Add SSH keys for user
+      authorized_key:
+        user: Souf
+        state: present
+        key: "{{ lookup('file', '/~/.ssh/souf_ssh_key.pub') }}"
